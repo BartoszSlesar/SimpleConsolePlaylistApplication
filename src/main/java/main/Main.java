@@ -1,12 +1,12 @@
 package main;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import playlist.Library;
 import playlist.Playlist;
 import utils.FileManagerLibrary;
 import utils.FileManagerPlaylist;
 import utils.ReadWriteFiles;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,10 +38,12 @@ public class Main {
                     break;
                 case 2:
                     Playlist playlist = selectPlaylist();
-                    playMusic(playlist);
+                    if (playlist != null) {
+                        playMusic(playlist);
+                    }
                     break;
                 case 3:
-                    CreatePlaylist();
+                    createPlaylist();
                     break;
                 case 4:
                     break;
@@ -114,10 +116,14 @@ public class Main {
 
     }
 
-    public static void CreatePlaylist() {
-        String[] n = ReadWriteFiles.getAllFileNames("libraries");
-        List<String> names = Arrays.stream(n).map(e -> e.replace(".json", "")).collect(Collectors.toList());
+    public static Playlist createPlaylist() {
+        String[] p = ReadWriteFiles.getAllFileNames("playlists");
+        List<String> names = Arrays.stream(p).map(e -> e.replace(".json", "")).collect(Collectors.toList());
         Library library = selectLibrary();
+        if (library == null) {
+            System.out.println("You do not have any libraries");
+            return null;
+        }
         scan.nextLine();
         System.out.println("Please enter playlist Name");
         String playListName = "";
@@ -132,16 +138,20 @@ public class Main {
 
         Playlist playlist = new Playlist(playListName, library);
         fileManagerPlaylist.saveData(playlist);
-
+        return playlist;
     }
 
 
     private static String selectObjectName(String parentFolder) {
         System.out.println("Please select library using numbers");
         String[] names = ReadWriteFiles.getAllFileNames(parentFolder);
+        if (names.length <= 0) {
+            return null;
+        }
         int index = 1;
         for (String name : names) {
             System.out.println(index + ": " + name);
+            index++;
         }
         int select = -1;
         do {
@@ -157,16 +167,35 @@ public class Main {
 
         } while (select < 1 || select >= names.length + 1);
 
-        return names[index - 1].replace(".json", "");
+        return names[select - 1].replace(".json", "");
     }
 
     private static Library selectLibrary() {
         String name = selectObjectName("libraries");
+        if (name == null) {
+            System.out.println("You dnot have any libraries");
+            return null;
+        }
         return fileManagerLibrary.getLibrary(name);
     }
 
     private static Playlist selectPlaylist() {
         String name = selectObjectName("playlists");
+        if (name == null) {
+            System.out.println("You do not have any playlists yet. do you want to Create one ? Yes/No");
+            String choice = "";
+            do {
+                choice = scan.nextLine();
+                if (choice.equalsIgnoreCase("yes")) {
+                    return createPlaylist();
+                } else if (choice.equalsIgnoreCase("no")) {
+                    return null;
+                } else {
+                    System.out.println("Please type Yes/No");
+                    choice = "run";
+                }
+            } while (choice.equals("run"));
+        }
         return fileManagerPlaylist.getPlaylist(name);
     }
 
