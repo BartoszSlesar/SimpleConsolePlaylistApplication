@@ -1,5 +1,6 @@
 package main;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import playlist.Library;
 import playlist.Playlist;
 import utils.FileManagerLibrary;
@@ -26,16 +27,18 @@ public class Main {
     }
 
     public static void mainOption() {
-        displayOptionMenu();
+        displayOptionMainMenu();
         boolean run = true;
         while (run) {
-            System.out.println("Please choose which option you want to select: (1: display all options)");
+            System.out.println("Please choose which option you want to select: (1: display options)");
             int option = scan.nextInt();
             switch (option) {
                 case 1:
-                    displayOptionMenu();
+                    displayOptionMainMenu();
                     break;
                 case 2:
+                    Playlist playlist = selectPlaylist();
+                    playMusic(playlist);
                     break;
                 case 3:
                     CreatePlaylist();
@@ -53,7 +56,7 @@ public class Main {
     }
 
 
-    public static void displayOptionMenu() {
+    private static void displayOptionMainMenu() {
         StringBuilder builder = new StringBuilder();
         builder.append("1: DisplayOptions\n");
         builder.append("2: Select Playlist\n");
@@ -63,8 +66,51 @@ public class Main {
         System.out.println(builder.toString());
     }
 
-    public static void selectPlaylist() {
-        
+    private static void displayOptionPlaylistMenu() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("1: DisplayOptions\n");
+        builder.append("2: Add Song to Playlist\n");
+        builder.append("3: Remove Song From Playlist\n");
+        builder.append("4: Delete Song\n");
+        builder.append("5: Next Song\n");
+        builder.append("6: Previous Song\n");
+        builder.append("7: Delete Current Song\n");
+        builder.append("8: Select different playlist\n");
+        System.out.println(builder.toString());
+    }
+
+    public static void playMusic(Playlist playlist) {
+        displayOptionPlaylistMenu();
+        boolean run = true;
+        while (run) {
+            System.out.println("Playlist: " + playlist.getName() + ".\nSelect option: (1: display available options)");
+            int option = scan.nextInt();
+            switch (option) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    System.out.println("Quiting current playlist:");
+                    run = false;
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
 
     }
 
@@ -119,8 +165,8 @@ public class Main {
         return fileManagerLibrary.getLibrary(name);
     }
 
-    private static Playlist getPlaylist() {
-        String name = selectObjectName("libraries");
+    private static Playlist selectPlaylist() {
+        String name = selectObjectName("playlists");
         return fileManagerPlaylist.getPlaylist(name);
     }
 
