@@ -64,6 +64,7 @@ public class Main {
     }
 
     public static void selectPlaylist() {
+        
 
     }
 
@@ -88,9 +89,10 @@ public class Main {
 
     }
 
-    private static Library selectLibrary() {
+
+    private static String selectObjectName(String parentFolder) {
         System.out.println("Please select library using numbers");
-        String[] names = ReadWriteFiles.getAllFileNames("libraries");
+        String[] names = ReadWriteFiles.getAllFileNames(parentFolder);
         int index = 1;
         for (String name : names) {
             System.out.println(index + ": " + name);
@@ -109,24 +111,18 @@ public class Main {
 
         } while (select < 1 || select >= names.length + 1);
 
-        return fileManagerLibrary.getLibrary(names[index - 1].replace(".json", ""));
+        return names[index - 1].replace(".json", "");
     }
 
-//    private static Library selectLibrary() {
-//        List<Library> libraries = fileManagerLibrary.getLibraries();
-//        int index = 1;
-//        for (Library library : libraries) {
-//            System.out.println(index + ": " + library.getLibraryName());
-//        }
-//        int select = -1;
-//        do {
-//            System.out.println("Please select library using numbers");
-//            select = scan.nextInt();
-//            if (select < 1 || select > libraries.size() + 1) {
-//                System.out.println("Wrong Number");
-//            }
-//        } while (select < 1 || select > libraries.size() + 1);
-//        return libraries.get(select);
-//    }
+    private static Library selectLibrary() {
+        String name = selectObjectName("libraries");
+        return fileManagerLibrary.getLibrary(name);
+    }
+
+    private static Playlist getPlaylist() {
+        String name = selectObjectName("libraries");
+        return fileManagerPlaylist.getPlaylist(name);
+    }
+
 
 }
