@@ -1,4 +1,4 @@
-package main;
+package utils;
 
 import playlist.Album;
 import playlist.Library;
@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class test {
+public class SongUploader {
     public static void main(String[] args) {
         ArrayList<Song> ram = getSongs("src/main/resources/album.txt");
         ArrayList<Song> meteora = getSongs("src/main/resources/meteora.txt");
