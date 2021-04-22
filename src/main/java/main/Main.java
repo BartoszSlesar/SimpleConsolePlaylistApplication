@@ -19,12 +19,23 @@ public class Main {
 
     public static void main(String[] args) {
 
-        mainOption();
+        runPlayListApplication();
 
 
     }
 
-    public static void mainOption() {
+
+    private static void displayOptionMainMenu() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("1: DisplayOptions\n");
+        builder.append("2: Select Playlist\n");
+        builder.append("3: Create New Playlist\n");
+        builder.append("4: Delete Playlist\n");
+        builder.append("5: End Program\n");
+        System.out.println(builder.toString());
+    }
+
+    public static void runPlayListApplication() {
         displayOptionMainMenu();
         boolean run = true;
         while (run) {
@@ -55,16 +66,6 @@ public class Main {
         }
     }
 
-
-    private static void displayOptionMainMenu() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("1: DisplayOptions\n");
-        builder.append("2: Select Playlist\n");
-        builder.append("3: Create New Playlist\n");
-        builder.append("4: Delete Playlist\n");
-        builder.append("5: End Program\n");
-        System.out.println(builder.toString());
-    }
 
     private static void displayOptionPlaylistMenu() {
         StringBuilder builder = new StringBuilder();
