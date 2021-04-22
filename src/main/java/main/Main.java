@@ -2,15 +2,13 @@ package main;
 
 import playlist.Library;
 import playlist.Playlist;
+import playlist.Song;
 import utils.FileManagerLibrary;
 import utils.FileManagerPlaylist;
 import utils.ReadWriteFiles;
 
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -74,20 +72,24 @@ public class Main {
         builder.append("2: Add Song to Playlist\n");
         builder.append("3: Remove Song From Playlist\n");
         builder.append("4: Show all Song in playlist\n");
-        builder.append("5: Delete Song\n");
-        builder.append("6: Next Song\n");
-        builder.append("7: Previous Song\n");
-        builder.append("8: Delete Current Song\n");
+        builder.append("5: Next Song\n");
+        builder.append("6: Previous Song\n");
+        builder.append("7: Delete Current Song\n");
+        builder.append("8: Save playlist");
         builder.append("9: Select different playlist (end)\n");
         System.out.println(builder.toString());
     }
 
     public static void playMusic(Playlist playlist) {
         displayOptionPlaylistMenu();
+        ListIterator<Song> playMusic = playlist.getSongIterator();
+        boolean goingForwoard = true;
+        playlist.firstSong();
         boolean run = true;
         while (run) {
             System.out.println("Playlist: " + playlist.getName() + ".\nSelect option: (1: display available options)");
             int option = scan.nextInt();
+            scan.nextLine();
             switch (option) {
                 case 1:
                     displayOptionPlaylistMenu();
@@ -102,6 +104,11 @@ public class Main {
                     playlist.ListAllSongsInPlaylist();
                     break;
                 case 5:
+                    if(playMusic.hasNext()){
+
+                    }else{
+                        System.out.println("You are currently in the end of play list");
+                    }
                     break;
                 case 6:
                     break;
@@ -127,12 +134,13 @@ public class Main {
         playlist.ListAllSongsInPlaylist();
         System.out.println("Please select number");
         int size = playlist.numberOfSongs();
-        int selected = scan.nextInt();
-        if (selected < 1 || selected > size) {
-            System.out.println("Wrong number was selected");
-        } else {
-            playlist.removeSongFromPlayList(selected - 1);
-            scan.next();
+        if (size > 0) {
+            int selected = scan.nextInt();
+            if (selected < 1 || selected > size) {
+                System.out.println("Wrong number was selected");
+            } else {
+                playlist.removeSongFromPlayList(selected - 1);
+            }
         }
     }
 
@@ -151,6 +159,7 @@ public class Main {
         displayAddSongOptions();
         boolean notSelected = true;
         String select = "";
+
         do {
             System.out.println("Please select option: ");
             select = scan.nextLine();
