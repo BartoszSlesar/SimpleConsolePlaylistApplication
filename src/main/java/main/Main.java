@@ -99,6 +99,7 @@ public class Main {
                     removeSongFromPlaylist(playlist);
                     break;
                 case 4:
+                    playlist.ListAllSongsInPlaylist();
                     break;
                 case 5:
                     break;
