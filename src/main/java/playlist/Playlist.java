@@ -24,18 +24,37 @@ public class Playlist {
         return library.getLibraryName();
     }
 
-    public void addSongToPlayList(String albumName, String bandName, String songTitle) {
-        Album album = new Album(albumName, bandName);
-        addSongToPlayList(album, songTitle);
+    public boolean addAllSongsFromAlbum(String albumName) {
+        Album album = library.getAlbum(new Album(albumName, ""));
+        if (album == null) {
+            System.out.println("Album do not exist");
+            return false;
+        }
+        for (Song song : album.getAllSongs()) {
+            this.playListSongs.addLast(song);
+        }
+        return true;
     }
 
-    public void addSongToPlayList(Album album, String songTitle) {
+    public boolean addSongToPlayList(String albumName, String songTitle) {
+        Album album = new Album(albumName, "");
+        return addSongToPlayList(album, songTitle);
+    }
+
+    public boolean addSongToPlayList(String albumName, String bandName, String songTitle) {
+        Album album = new Album(albumName, bandName);
+        return addSongToPlayList(album, songTitle);
+    }
+
+    public boolean addSongToPlayList(Album album, String songTitle) {
         Song song = library.findSong(album, songTitle);
         if (song == null) {
             System.out.println("Song " + songTitle + " can't be added");
-        } else {
-            this.playListSongs.addFirst(song);
+            return false;
         }
+        this.playListSongs.addFirst(song);
+        return true;
+
     }
 
     public int addSongToPlayList(String songTitle) {
@@ -80,6 +99,20 @@ public class Playlist {
 
     public void showAllSongsYouCanAddToPlayList() {
         library.showAlbums(true);
+    }
+
+    public void showAllSongsYouCanAddToPlayList(String album) {
+        Album a = library.getAlbum(album);
+        if (a == null) {
+            System.out.println(album + " Do not exist in your library");
+        } else {
+            library.listAllSongs(a);
+        }
+
+    }
+
+    public int showAvailableAlbums() {
+        return library.showAlbums(false);
     }
 
     public void ListAllSongsInPlaylist() {

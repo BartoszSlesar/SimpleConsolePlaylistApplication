@@ -141,11 +141,11 @@ public class Album {
         if (this == o) return true;
         if (!(o instanceof Album)) return false;
         Album album = (Album) o;
-        return title.equals(album.title) && band.equals(album.band);
+        return title.equals(album.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, band);
+        return Objects.hash(title);
     }
 }

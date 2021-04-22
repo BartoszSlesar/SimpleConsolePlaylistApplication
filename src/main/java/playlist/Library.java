@@ -130,6 +130,10 @@ public class Library {
         return foundAlbums;
     }
 
+    public Album getAlbum(String name) {
+        return getAlbum(name, "");
+    }
+
     public Album getAlbum(String name, String band) {
         return getAlbum(new Album(name, band));
     }
@@ -147,21 +151,24 @@ public class Library {
         return this.albums.contains(album);
     }
 
-    public void showAlbums(boolean showAllSongs) {
+    public int showAlbums(boolean showAllSongs) {
+        int index = 1;
         for (Album album : this.albums) {
-            System.out.println(album.toString());
+            System.out.println(index + ". " + album.toString());
+            index++;
             if (showAllSongs) {
                 System.out.println("Songs:");
                 listAllSongs(album);
             }
             System.out.println("================================================");
         }
+        return index;
     }
 
     public void listAllSongs(Album album) {
         int index = 1;
         for (Song song : album.getAllSongs()) {
-            System.out.println(index+". "+song.toString());
+            System.out.println(index + ". " + song.toString());
             index++;
         }
     }

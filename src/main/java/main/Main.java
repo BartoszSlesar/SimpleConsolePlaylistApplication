@@ -92,6 +92,7 @@ public class Main {
                     displayOptionPlaylistMenu();
                     break;
                 case 2:
+                    addSongToPlaylist(playlist);
                     break;
                 case 3:
                     break;
@@ -115,6 +116,67 @@ public class Main {
         }
 
 
+    }
+
+    private static void displayAddSongOptions() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("0: to display options\n");
+        sb.append("1: if you want to display all Avalible albums\n");
+        sb.append("2: if you want to display all songs from album\n");
+        sb.append("3: Add Song to playlist\n");
+        sb.append("4: Add all Song from Selected Album\n");
+        sb.append("5: exit");
+        System.out.println(sb.toString());
+    }
+
+    private static void addSongToPlaylist(Playlist playlist) {
+        displayAddSongOptions();
+        boolean notSelected = true;
+        String select = "";
+        do {
+            System.out.println("Please select option: ");
+            select = scan.nextLine();
+            switch (select) {
+                case "0":
+                    displayAddSongOptions();
+                    break;
+                case "1":
+                    playlist.showAvailableAlbums();
+                    break;
+                case "2":
+                    System.out.println("Please type album");
+                    String album = scan.nextLine();
+                    playlist.showAllSongsYouCanAddToPlayList(album);
+                    break;
+                case "3":
+                    System.out.println("Please type song title");
+                    String songTitle = scan.nextLine();
+                    System.out.println("Please type album name");
+                    String albumName = scan.nextLine();
+                    notSelected = !playlist.addSongToPlayList(albumName, songTitle);
+                    if (!notSelected) {
+                        select = "Song was added correctly";
+                    }
+                    break;
+                case "4":
+                    playlist.showAvailableAlbums();
+                    System.out.println("Please type album name");
+                    String name = scan.nextLine();
+                    notSelected = !playlist.addAllSongsFromAlbum(name);
+                    if (!notSelected) {
+                        select = "All songs was added correctly";
+                    }
+                    break;
+                case "5":
+                    select = "exit";
+                    notSelected = false;
+                    break;
+                default:
+                    break;
+            }
+
+        } while (notSelected);
+        System.out.println(select);
     }
 
     public static Playlist createPlaylist() {
