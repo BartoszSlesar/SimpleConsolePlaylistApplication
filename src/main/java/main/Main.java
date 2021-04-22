@@ -75,7 +75,7 @@ public class Main {
         builder.append("5: Next Song\n");
         builder.append("6: Previous Song\n");
         builder.append("7: Delete Current Song\n");
-        builder.append("8: Save playlist");
+        builder.append("8: Save playlist\n");
         builder.append("9: Select different playlist (end)\n");
         System.out.println(builder.toString());
     }
@@ -84,10 +84,17 @@ public class Main {
         displayOptionPlaylistMenu();
         ListIterator<Song> playMusic = playlist.getSongIterator();
         boolean goingForwoard = true;
-        playlist.firstSong();
+        Song currentSong = null;
+
+        if (playMusic.hasNext()) {
+            currentSong = playMusic.next();
+        }
         boolean run = true;
         while (run) {
-            System.out.println("Playlist: " + playlist.getName() + ".\nSelect option: (1: display available options)");
+            System.out.println("Playlist: " + playlist.getName() + ".\nSelect option: (1: display available options)\n");
+            if (currentSong != null) {
+                System.out.println("Currently playing: " + currentSong.toString());
+            }
             int option = scan.nextInt();
             scan.nextLine();
             switch (option) {
@@ -104,9 +111,9 @@ public class Main {
                     playlist.ListAllSongsInPlaylist();
                     break;
                 case 5:
-                    if(playMusic.hasNext()){
-
-                    }else{
+                    if (playMusic.hasNext()) {
+                        currentSong = playMusic.next();
+                    } else {
                         System.out.println("You are currently in the end of play list");
                     }
                     break;
@@ -115,6 +122,7 @@ public class Main {
                 case 7:
                     break;
                 case 8:
+                    fileManagerPlaylist.saveData(playlist);
                     break;
                 case 9:
                     System.out.println("Quiting current playlist:");

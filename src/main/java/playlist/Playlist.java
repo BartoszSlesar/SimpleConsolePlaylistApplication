@@ -115,14 +115,6 @@ public class Playlist {
 
     }
 
-    public void firstSong() {
-        if (this.playListSongs.size() > 0) {
-            System.out.println("Currently playing " + this.playListSongs.getFirst().toString());
-        } else {
-            System.out.println("Your playlist is empty");
-        }
-    }
-
     public int showAvailableAlbums() {
         return library.showAlbums(false);
     }
