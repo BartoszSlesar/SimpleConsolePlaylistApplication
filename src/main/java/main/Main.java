@@ -111,6 +111,10 @@ public class Main {
                     playlist.ListAllSongsInPlaylist();
                     break;
                 case 5:
+                    if (!goingForwoard) {
+                        playMusic.next();
+                        goingForwoard = true;
+                    }
                     if (playMusic.hasNext()) {
                         currentSong = playMusic.next();
                     } else {
@@ -118,6 +122,16 @@ public class Main {
                     }
                     break;
                 case 6:
+                    if (goingForwoard) {
+                        playMusic.previous();
+                        goingForwoard = false;
+                    }
+                    if (playMusic.hasPrevious()) {
+                        currentSong = playMusic.previous();
+
+                    } else {
+                        System.out.println("You are currently in the first song");
+                    }
                     break;
                 case 7:
                     break;
