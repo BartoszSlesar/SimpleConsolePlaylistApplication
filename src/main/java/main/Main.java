@@ -55,6 +55,11 @@ public class Main {
                     createPlaylist();
                     break;
                 case 4:
+                    Playlist toBeDeleted = selectPlaylist();
+                    if (toBeDeleted != null) {
+                        fileManagerPlaylist.deletePlaylist(toBeDeleted.getName());
+                        System.out.println("Play list has been deleted");
+                    }
                     break;
                 case 5:
                     System.out.println("Turning of:");

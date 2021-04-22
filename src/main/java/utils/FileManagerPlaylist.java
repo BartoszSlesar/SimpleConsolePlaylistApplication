@@ -57,7 +57,7 @@ public class FileManagerPlaylist implements LocalPersistentPlaylist {
 
     @Override
     public void deletePlaylist(String name) {
-        String path = "src/data/playlists/" + name + ".json";
+        String path = "src/main/resources/playlists/" + name + ".json";
         File file = new File(path);
         if (file.isFile() && file.delete()) {
             System.out.println("Playlist was deleted");
