@@ -73,11 +73,12 @@ public class Main {
         builder.append("1: DisplayOptions\n");
         builder.append("2: Add Song to Playlist\n");
         builder.append("3: Remove Song From Playlist\n");
-        builder.append("4: Delete Song\n");
-        builder.append("5: Next Song\n");
-        builder.append("6: Previous Song\n");
-        builder.append("7: Delete Current Song\n");
-        builder.append("8: Select different playlist (end)\n");
+        builder.append("4: Show all Song in playlist\n");
+        builder.append("5: Delete Song\n");
+        builder.append("6: Next Song\n");
+        builder.append("7: Previous Song\n");
+        builder.append("8: Delete Current Song\n");
+        builder.append("9: Select different playlist (end)\n");
         System.out.println(builder.toString());
     }
 
@@ -95,6 +96,7 @@ public class Main {
                     addSongToPlaylist(playlist);
                     break;
                 case 3:
+                    removeSongFromPlaylist(playlist);
                     break;
                 case 4:
                     break;
@@ -105,6 +107,8 @@ public class Main {
                 case 7:
                     break;
                 case 8:
+                    break;
+                case 9:
                     System.out.println("Quiting current playlist:");
                     run = false;
                     break;
@@ -116,6 +120,19 @@ public class Main {
         }
 
 
+    }
+
+    private static void removeSongFromPlaylist(Playlist playlist) {
+        playlist.ListAllSongsInPlaylist();
+        System.out.println("Please select number");
+        int size = playlist.numberOfSongs();
+        int selected = scan.nextInt();
+        if (selected < 1 || selected > size) {
+            System.out.println("Wrong number was selected");
+        } else {
+            playlist.removeSongFromPlayList(selected - 1);
+            scan.next();
+        }
     }
 
     private static void displayAddSongOptions() {

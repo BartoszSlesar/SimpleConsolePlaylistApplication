@@ -16,6 +16,10 @@ public class Playlist {
         playListSongs = new LinkedList<Song>();
     }
 
+    public int numberOfSongs() {
+        return this.playListSongs.size();
+    }
+
     public String getName() {
         return name;
     }
