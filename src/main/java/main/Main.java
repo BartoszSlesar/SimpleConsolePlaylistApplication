@@ -77,7 +77,7 @@ public class Main {
         builder.append("5: Next Song\n");
         builder.append("6: Previous Song\n");
         builder.append("7: Delete Current Song\n");
-        builder.append("8: Select different playlist\n");
+        builder.append("8: Select different playlist (end)\n");
         System.out.println(builder.toString());
     }
 
@@ -89,6 +89,7 @@ public class Main {
             int option = scan.nextInt();
             switch (option) {
                 case 1:
+                    displayOptionPlaylistMenu();
                     break;
                 case 2:
                     break;
