@@ -85,7 +85,6 @@ public class Main {
         ListIterator<Song> playMusic = playlist.getSongIterator();
         boolean goingForwoard = true;
         Song currentSong = null;
-
         if (playMusic.hasNext()) {
             currentSong = playMusic.next();
         }
@@ -134,6 +133,15 @@ public class Main {
                     }
                     break;
                 case 7:
+                    if (playMusic.hasPrevious() || playMusic.hasNext()) {
+                        playMusic.remove();
+                        System.out.println(currentSong.getTitle() + " was removed from playlist");
+                        currentSong = playMusic.next();
+                        goingForwoard = true;
+                    } else {
+                        System.out.println("No songs was removed");
+                    }
+
                     break;
                 case 8:
                     fileManagerPlaylist.saveData(playlist);
