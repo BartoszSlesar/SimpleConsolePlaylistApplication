@@ -139,28 +139,14 @@ public class Main {
                     }
                     break;
                 case 7:
-
-                    if (goingForwoard) {
+                    if(playlist.numberOfSongs()>0){
                         playMusic.remove();
-                        System.out.println(currentSong.getTitle() + " was removed from playlist");
                         if (playMusic.hasNext()) {
                             currentSong = playMusic.next();
                         } else if (playMusic.hasPrevious()) {
                             currentSong = playMusic.previous();
-                            goingForwoard = false;
-                        }
-                    } else {
-                        playMusic.remove();
-                        System.out.println(currentSong.getTitle() + " was removed from playlist");
-                        if (playMusic.hasPrevious()) {
-                            currentSong = playMusic.previous();
-                        } else if (playMusic.hasNext()) {
-                            currentSong = playMusic.previous();
-                            goingForwoard = true;
                         }
                     }
-
-
                     break;
                 case 8:
                     fileManagerPlaylist.saveData(playlist);
