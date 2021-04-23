@@ -139,14 +139,27 @@ public class Main {
                     }
                     break;
                 case 7:
-                    if (playMusic.hasPrevious() || playMusic.hasNext()) {
+
+                    if (goingForwoard) {
                         playMusic.remove();
                         System.out.println(currentSong.getTitle() + " was removed from playlist");
-                        currentSong = playMusic.next();
-                        goingForwoard = true;
+                        if (playMusic.hasNext()) {
+                            currentSong = playMusic.next();
+                        } else if (playMusic.hasPrevious()) {
+                            currentSong = playMusic.previous();
+                            goingForwoard = false;
+                        }
                     } else {
-                        System.out.println("No songs was removed");
+                        playMusic.remove();
+                        System.out.println(currentSong.getTitle() + " was removed from playlist");
+                        if (playMusic.hasPrevious()) {
+                            currentSong = playMusic.previous();
+                        } else if (playMusic.hasNext()) {
+                            currentSong = playMusic.previous();
+                            goingForwoard = true;
+                        }
                     }
+
 
                     break;
                 case 8:
