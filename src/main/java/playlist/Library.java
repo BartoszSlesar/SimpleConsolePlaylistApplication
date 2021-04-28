@@ -2,17 +2,18 @@ package playlist;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Library {
     private String libraryName;
-    private ArrayList<Album> albums;
+    private List<Album> albums;
 
 
     public Library(String libraryName) {
         this(libraryName, new ArrayList<Album>());
     }
 
-    public Library(String libraryName, ArrayList<Album> albums) {
+    public Library(String libraryName, List<Album> albums) {
         this.libraryName = libraryName;
         this.albums = albums;
     }

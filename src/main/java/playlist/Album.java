@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Album {
     private String title;
     private String band;
-    private ArrayList<Song> songs;
+    private List<Song> songs;
     private String releaseYear;
 
     public Album(String title, String band) {
@@ -18,7 +18,7 @@ public class Album {
         this.title = title;
         this.band = band;
         this.releaseYear = releaseYear;
-        songs = new ArrayList<Song>();
+        songs = new ArrayList<>();
     }
 
     public String getTitle() {
@@ -29,7 +29,7 @@ public class Album {
         return band;
     }
 
-    public ArrayList<Song> getAllSongs() {
+    public List<Song> getAllSongs() {
         return songs;
     }
 

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     private static Scanner scan = new Scanner(System.in);
-    private static ArrayList<Playlist> playlists = new ArrayList<Playlist>();
+    private static List<Playlist> playlists = new ArrayList<Playlist>();
     private static FileManagerLibrary fileManagerLibrary = new FileManagerLibrary();
     private static FileManagerPlaylist fileManagerPlaylist = new FileManagerPlaylist();
 
